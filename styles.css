@@ -1,0 +1,22 @@
+body {
+    background-color: #98AFC7;
+}
+
+.card {
+    border: 2px solid #101357;
+    background-color: #EAF4FC;
+}
+
+h1 {
+    color: #101357;
+    border-bottom: 2px solid #101357;
+}
+
+#recommendation {
+    background-color: #beef00;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #002855;
+    min-height: 60px;
+}
