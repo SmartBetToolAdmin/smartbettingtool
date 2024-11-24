@@ -5,32 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Betting Calculator</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body style="background-color: #98AFC7;">
+<body>
     <div class="container mt-5">
-        <h1 class="text-center py-3" style="color: #101357; border-bottom: 2px solid #101357;">Betting Calculator</h1>
-        <div class="card shadow mt-4 p-4" style="border: 2px solid #101357; background-color: #EAF4FC;">
+        <h1 class="text-center py-3">Betting Calculator</h1>
+        <p class="text-center mb-4 text-muted">Enhance your betting strategy with precise predictions!</p>
+        
+        <div class="card shadow p-4">
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <label for="avgTeam1" class="form-label"><strong>Average Score (Team 1)</strong></label>
+                    <label for="avgTeam1" class="form-label">Average Score (Team 1)</label>
                     <input type="number" id="avgTeam1" class="form-control" placeholder="Enter average score for Team 1">
                 </div>
                 <div class="col-md-6">
-                    <label for="avgTeam2" class="form-label"><strong>Average Score (Team 2)</strong></label>
+                    <label for="avgTeam2" class="form-label">Average Score (Team 2)</label>
                     <input type="number" id="avgTeam2" class="form-control" placeholder="Enter average score for Team 2">
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-4">
-                    <label for="oddsTeam1" class="form-label"><strong>Odds (Team 1)</strong></label>
+                    <label for="oddsTeam1" class="form-label">Odds (Team 1)</label>
                     <input type="number" id="oddsTeam1" class="form-control" placeholder="Enter odds for Team 1">
                 </div>
                 <div class="col-md-4">
-                    <label for="oddsTeam2" class="form-label"><strong>Odds (Team 2)</strong></label>
+                    <label for="oddsTeam2" class="form-label">Odds (Team 2)</label>
                     <input type="number" id="oddsTeam2" class="form-control" placeholder="Enter odds for Team 2">
                 </div>
                 <div class="col-md-4">
-                    <label for="oddsDraw" class="form-label"><strong>Odds (Draw)</strong></label>
+                    <label for="oddsDraw" class="form-label">Odds (Draw)</label>
                     <input type="number" id="oddsDraw" class="form-control" placeholder="Enter odds for a draw">
                 </div>
             </div>
@@ -41,9 +44,19 @@
                 <button class="btn btn-info flex-grow-1 mx-1" onclick="calculateOverUnder()">Over/Under Goals</button>
                 <button class="btn btn-danger flex-grow-1 mx-1" onclick="clearAll()">Clear</button>
             </div>
-            <div id="recommendation" class="p-4 mt-3" style="background-color: #beef00; border-radius: 10px; font-size: 1.2rem; font-weight: bold; color: #002855; min-height: 60px;">
-                <!-- Recommendations appear here -->
+            <div id="recommendation" class="p-4 mt-3">
+                <!-- Recommendations will appear here -->
             </div>
+        </div>
+
+        <div class="tips mt-5 p-4 bg-light rounded shadow">
+            <h4 class="mb-3 text-success">Betting Tips</h4>
+            <ul class="list-unstyled text-muted">
+                <li>✔ Analyze team form and performance before betting.</li>
+                <li>✔ Use data-driven predictions for informed decisions.</li>
+                <li>✔ Never chase losses; bet responsibly.</li>
+                <li>✔ Always compare odds across platforms for the best value.</li>
+            </ul>
         </div>
     </div>
     <script src="script.js"></script>

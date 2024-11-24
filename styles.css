@@ -1,22 +1,44 @@
 body {
-    background-color: #98AFC7;
-}
-
-.card {
-    border: 2px solid #101357;
-    background-color: #EAF4FC;
+    background-color: #F8F9FA;
+    font-family: 'Arial', sans-serif;
 }
 
 h1 {
-    color: #101357;
-    border-bottom: 2px solid #101357;
+    color: #1D3557;
+    border-bottom: 3px solid #1D3557;
+    font-weight: bold;
+}
+
+.card {
+    background-color: #ffffff;
+    border: none;
+    border-radius: 15px;
 }
 
 #recommendation {
-    background-color: #beef00;
+    background-color: #F4F6F9;
+    border: 2px dashed #457B9D;
+    color: #1D3557;
     border-radius: 10px;
     font-size: 1.2rem;
     font-weight: bold;
-    color: #002855;
     min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tips {
+    border: 2px solid #A8DADC;
+}
+
+button {
+    font-size: 1rem;
+    padding: 0.6rem;
+    font-weight: bold;
+}
+
+button:hover {
+    transform: scale(1.05);
+    transition: 0.2s ease;
 }
