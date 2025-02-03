@@ -3,15 +3,374 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Betting Calculator - Enhance your betting strategy with precise predictions and detailed analysis for various sports.">
+    <meta name="keywords" content="Betting calculator, sports betting, predictions, strategies, betting tips, football, soccer, cricket, basketball">
     <title>Betting Calculator</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #FAFAFA;
+            font-family: 'Arial', sans-serif;
+        }
+
+        h1 {
+            color: #002855;
+            border-bottom: 3px solid #002855;
+            font-weight: bold;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: none;
+            border-radius: 15px;
+            transform: scale(0.67); /* Resize calculator to 2/3rds */
+        }
+
+        #recommendation {
+            background-color: #E8F5FF;
+            border: 2px dashed #0077B6;
+            color: #00509E;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tips {
+            border: 2px solid #90E0EF;
+            margin-top: 0; /* Remove space between calculator and tips */
+        }
+
+        .link-container {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .link-container a {
+            color: #0077B6;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 1rem;
+        }
+
+        .link-container a:hover {
+            text-decoration: underline;
+        }
+
+        .link-container::before,
+        .link-container::after {
+            content: "";
+            display: block;
+            height: 1px;
+            background-color: #A8DADC;
+            margin: 10px 0;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            z-index: 1000;
+            list-style: none;
+            padding: 10px;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 5px 10px;
+            text-decoration: none;
+            color: #000;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        label {
+            color: #007B83;
+            font-weight: bold;
+        }
+
+        .sports-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .sports-buttons a {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #FF6F61; /* Professional Blue Color */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .sports-buttons a:hover {
+            background-color: #FF4D3E;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #00509E;
+            color: white;
+        }
+
+        .most-popular {
+            text-align: center;
+            margin-top: 30px;
+            font-weight: bold;
+            color: #002855;
+            font-size: 1.5rem;
+        }
+
+ .explore-dropdown {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1050;
+        }
+
+        .explore-btn {
+            background-color: #00BFA5;
+            color: white;
+            border: none;
+            font-size: 16px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .explore-btn:hover {
+            background-color: #00897B;
+        }
+
+        .explore-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            list-style: none;
+            padding: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .explore-menu a {
+            text-decoration: none;
+            color: #000;
+            font-size: 14px;
+            display: block;
+            padding: 5px 10px;
+        }
+
+        .explore-menu a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .explore-dropdown:hover .explore-menu {
+            display: block;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+.search-bar {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    background-color: #FFFFFF; /* Clean white background */
+}
+
+form {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0.2px;
+    background-color: #FFFFFF;
+}
+
+.dropdown {
+    margin-right: 10px;
+}
+
+.dropdown-select {
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+input#searchInput {
+    border: none;
+    padding: 5px;
+    width: 300px;
+    outline: none;
+    font-size: 14px;
+}
+
+button.search-button {
+    border: none;
+    background-color: #FF6F61;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button.search-button:hover {
+    background-color: #FF4D3E;
+}
+</style>
 </head>
 <body>
+<!-- Search Bar -->
+    <div class="search-bar">
+        <form id="searchForm">
+            <div class="dropdown">
+                <select id="searchCategory" class="dropdown-select">
+                    <option value="all">All</option>
+                    <option value="moneyline.html">Moneyline (Win/Draw/Win)</option>
+                    <option value="pointspread.html">Point Spread (Handicap)</option>
+                    <option value="overunder.html">Over/Under (Totals)</option>
+                    <option value="doublechance.html">Double Chance</option>
+                    <option value="drawnobet.html">Draw No Bet</option>
+                    <option value="bothteamstoscore.html">Both Teams to Score</option>
+                    <option value="firstgoalscorer.html">First Goal Scorer</option>
+                    <option value="anytimegoalscorer.html">Anytime Goal Scorer</option>
+                    <option value="halftimefulltime.html">Half-Time/Full-Time</option>
+                    <option value="exactscore.html">Exact Score</option>
+                    <option value="parlay.html">Parlay/Accumulator</option>
+                    <option value="outrights.html">Outrights (Futures)</option>
+                    <option value="asianhandicap.html">Asian Handicap</option>
+                    <option value="liveinplay.html">Live/In-Play Betting</option>
+                    <option value="winningmargin.html">Winning Margin</option>
+                    <option value="correctscoreline.html">Correct Scoreline</option>
+                    <option value="cleansheet.html">Clean Sheet</option>
+                    <option value="timeofgoal.html">Time of Goal</option>
+                    <option value="firsthalfbets.html">First Half Bets</option>
+                    <option value="playerprops.html">Player Props</option>
+                    <option value="football.html">Football (Soccer)</option>
+                    <option value="cricket.html">Cricket</option>
+                    <option value="basketball.html">Basketball</option>
+                    <option value="tennis.html">Tennis</option>
+                    <option value="fieldhockey.html">Field Hockey</option>
+                    <option value="volleyball.html">Volleyball</option>
+                    <option value="tabletennis.html">Table Tennis</option>
+                    <option value="baseball.html">Baseball</option>
+                    <option value="golf.html">Golf</option>
+                    <option value="americanfootball.html">American Football</option>
+                    <option value="rugby.html">Rugby</option>
+                    <option value="badminton.html">Badminton</option>
+                    <option value="swimming.html">Swimming</option>
+                    <option value="motorsport.html">Motorsport</option>
+                    <option value="boxing.html">Boxing</option>
+                </select>
+            </div>
+            <input type="text" id="searchInput" placeholder="Search...">
+            <button type="submit" class="search-button">🔍</button>
+        </form>
+    </div>
+<!-- Explore Button -->
+    <div class="explore-dropdown">
+        <button class="explore-btn">Explore</button>
+        <ul class="explore-menu">
+            <li><a href="moneyline.html">Moneyline (Win/Draw/Win)</a></li>
+            <li><a href="pointspread.html">Point Spread (Handicap)</a></li>
+            <li><a href="overunder.html">Over/Under (Totals)</a></li>
+            <li><a href="doublechance.html">Double Chance</a></li>
+            <li><a href="drawnobet.html">Draw No Bet</a></li>
+            <li><a href="bothteamstoscore.html">Both Teams to Score</a></li>
+            <li><a href="firstgoalscorer.html">First Goal Scorer</a></li>
+            <li><a href="anytimegoalscorer.html">Anytime Goal Scorer</a></li>
+            <li><a href="halftimefulltime.html">Half-Time/Full-Time</a></li>
+            <li><a href="exactscore.html">Exact Score</a></li>
+            <li><a href="parlay.html">Parlay/Accumulator</a></li>
+            <li><a href="outrights.html">Outrights (Futures)</a></li>
+            <li><a href="asianhandicap.html">Asian Handicap</a></li>
+            <li><a href="liveinplay.html">Live/In-Play Betting</a></li>
+            <li><a href="winningmargin.html">Winning Margin</a></li>
+            <li><a href="correctscoreline.html">Correct Scoreline</a></li>
+            <li><a href="cleansheet.html">Clean Sheet</a></li>
+            <li><a href="timeofgoal.html">Time of Goal</a></li>
+            <li><a href="firsthalfbets.html">First Half Bets</a></li>
+            <li><a href="playerprops.html">Player Props</a></li>
+            <li><a href="football.html">Football (Soccer)</a></li>
+            <li><a href="cricket.html">Cricket</a></li>
+            <li><a href="basketball.html">Basketball</a></li>
+            <li><a href="tennis.html">Tennis</a></li>
+            <li><a href="fieldhockey.html">Field Hockey</a></li>
+            <li><a href="volleyball.html">Volleyball</a></li>
+            <li><a href="tabletennis.html">Table Tennis</a></li>
+            <li><a href="baseball.html">Baseball</a></li>
+            <li><a href="golf.html">Golf</a></li>
+            <li><a href="americanfootball.html">American Football</a></li>
+            <li><a href="rugby.html">Rugby</a></li>
+            <li><a href="badminton.html">Badminton</a></li>
+            <li><a href="swimming.html">Swimming</a></li>
+            <li><a href="motorsport.html">Motorsport</a></li>
+            <li><a href="boxing.html">Boxing</a></li>
+        </ul>
+    </div>
+
     <div class="container mt-5">
         <h1 class="text-center py-3">Betting Calculator</h1>
-        <p class="text-center mb-4 text-muted">Enhance your betting strategy with precise predictions!</p>
-        
+        <p class="text-center mb-4" style="color: #0000FF; font-weight: bold;">Enhance your betting strategy with precise predictions!</p>
+
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button">
+                Bet Types
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="moneyline.html">Moneyline (Win/Draw/Win)</a></li>
+                <li><a href="pointspread.html">Point Spread (Handicap)</a></li>
+                <li><a href="overunder.html">Over/Under (Totals)</a></li>
+                <li><a href="doublechance.html">Double Chance</a></li>
+                <li><a href="drawnobet.html">Draw No Bet</a></li>
+                <li><a href="bothteamstoscore.html">Both Teams to Score</a></li>
+                <li><a href="firstgoalscorer.html">First Goal Scorer</a></li>
+                <li><a href="anytimegoalscorer.html">Anytime Goal Scorer</a></li>
+                <li><a href="halftimefulltime.html">Half-Time/Full-Time</a></li>
+                <li><a href="exactscore.html">Exact Score</a></li>
+                <li><a href="parlay.html">Parlay/Accumulator</a></li>
+                <li><a href="outrights.html">Outrights (Futures)</a></li>
+                <li><a href="asianhandicap.html">Asian Handicap</a></li>
+                <li><a href="liveinplay.html">Live/In-Play Betting</a></li>
+                <li><a href="winningmargin.html">Winning Margin</a></li>
+                <li><a href="correctscoreline.html">Correct Scoreline</a></li>
+                <li><a href="cleansheet.html">Clean Sheet</a></li>
+                <li><a href="timeofgoal.html">Time of Goal</a></li>
+                <li><a href="firsthalfbets.html">First Half Bets</a></li>
+                <li><a href="playerprops.html">Player Props</a></li>
+            </ul>
+        </div>
+
         <div class="card shadow p-4">
             <div class="row mb-3">
                 <div class="col-md-6">
@@ -49,7 +408,7 @@
             </div>
         </div>
 
-        <div class="tips mt-5 p-4 bg-light rounded shadow">
+        <div class="tips mt-2 p-4 bg-light rounded shadow">
             <h4 class="mb-3 text-success">Betting Tips</h4>
             <ul class="list-unstyled text-muted">
                 <li>✔ Analyze team form and performance before betting.</li>
@@ -58,7 +417,38 @@
                 <li>✔ Always compare odds across platforms for the best value.</li>
             </ul>
         </div>
+
+        <div class="link-container">
+            <a href="smart-betting.html">Smart Betting</a>
+            <a href="win-draw-betting.html">Win/Draw Betting</a>
+            <a href="both-to-score-betting.html">Both to Score Betting</a>
+            <a href="first-to-score-betting.html">First to Score Betting</a>
+            <a href="over-under-betting.html">Over/Under Betting</a>
+        </div>
+
+        <div class="most-popular">Most Popular Sports</div>
+
+        <div class="sports-buttons">
+            <a href="football.html">Football (Soccer)</a>
+            <a href="cricket.html">Cricket</a>
+            <a href="basketball.html">Basketball</a>
+            <a href="tennis.html">Tennis</a>
+            <a href="fieldhockey.html">Field Hockey</a>
+            <a href="volleyball.html">Volleyball</a>
+            <a href="tabletennis.html">Table Tennis</a>
+            <a href="baseball.html">Baseball</a>
+            <a href="golf.html">Golf</a>
+            <a href="americanfootball.html">American Football</a>
+            <a href="rugby.html">Rugby</a>
+            <a href="badminton.html">Badminton</a>
+            <a href="swimming.html">Swimming</a>
+            <a href="motorsport.html">Motorsport</a>
+            <a href="boxing.html">Boxing</a>
+        </div>
     </div>
+
+    <footer>&copy; 2024 Betting Calculator. All Rights Reserved.</footer>
+
     <script src="script.js"></script>
 </body>
 </html>
